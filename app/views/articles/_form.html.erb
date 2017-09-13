@@ -1,0 +1,95 @@
+<%= form_for(@article) do |f|%>
+    <% @article.errors.full_messages.each do |message|%>
+        <div class="arriba">
+          <div class="alert alert-danger">
+            <div class="container-fluid">
+              <div class="alert-icon">
+                <i class="material-icons">warning</i>
+              </div>
+              <b>Alerta de Error en el </b> <%= message %>
+            </div>
+          </div>
+    <%end%>
+    </div>
+
+    <div class="col-md-10">
+
+      <div class="form-group label-floating">
+        <div class="field">
+          <%= f.text_field :title, placeholder: "Titulo", class:"form-control"%>
+        </div>
+        <div class="field">
+          <div class="form-group label-floating">
+            <%= f.text_area :body, placeholder: "Escribe una descripcion de la actividad", class:"form-control"%>
+          </div>
+        </div>
+        <div class="field">
+          <div class="form-group label-floating">
+            <%= f.text_area :objectives, placeholder: "Escribe los objetivos de la actividad", class:"form-control"%>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="form-group label-floating">
+            <%= f.text_area :finishactivity, placeholder: "Completada la actividad el alumno sera capaz de:", class:"form-control"%>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="form-group label-floating">
+            <%= f.text_area :goals, placeholder: "Escribe los alcances de la actividad", class:"form-control"%>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="form-group label-floating">
+            <%= f.text_area :requirements, placeholder: "Elementos para realizar la actividad", class:"form-control"%>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="form-group label-floating">
+            <%= f.text_area :youtubeurl, placeholder: "Pegar el link del video de youtube", class:"form-control"%>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="form-group label-floating">
+            <%= f.text_area :form, placeholder: "Pegar el link del examen aqui", class:"form-control"%>
+          </div>
+        </div>
+
+        <button class="btn btn-success">Subir imagen de portada <%= f.file_field :image %></button>
+        <br>
+        <br>
+
+        <button class="btn btn-success">Subir imagen del diagrama de Fritzing <%= f.file_field :imagefritzing %></button>
+        <br>
+        <br>
+
+
+        <button class="btn btn-success">Subir imagen de los materiales <%= f.file_field :imagematerials %></button>
+        <br>
+        <br>
+
+        <button class="btn btn-success">Subir imagen de la programacion <%= f.file_field :imagearduino %></button>
+        <br>
+        <br>
+
+        <div class="field">
+          <label>Seleccione un curso:</label>
+          <% @categories.each do |category| %>
+              <div class="field">
+                <%= check_box_tag "categories[]", category.id%> <%= category.title%>
+              </div>
+          <%end%>
+        </div>
+
+        <br>
+        <br>
+        <div class="field">
+          <%= f.submit "Guardar nueva actividad", class:"btn btn-success"%>
+        </div>
+      </div>
+<%end%>
+</div>

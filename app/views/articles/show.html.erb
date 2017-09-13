@@ -1,0 +1,360 @@
+<% if user_signed_in? %>
+
+    <!--Si la actividad no tiene usuario de creacion evita el error-->
+    <% unless @article.user.nil? %>
+    <%end%>
+    <!---->
+    <head>
+
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+
+      <style>
+        /* Header Image Background - Change the URL below to your image path (example: ../images/background.jpg) */
+
+        .business-header {
+          height: 400px;
+          background: url(<%= @article.image.url(:thumb) %>) center center no-repeat scroll;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          background-size: cover;
+          -o-background-size: cover;
+        }
+
+        /* Customize the text color and shadow color and to optimize text legibility. */
+
+        .tagline {
+          text-shadow: 0 0 10px #000;
+          color: #fff;
+        }
+
+        .img-center {
+          margin: 0 auto;
+        }
+
+        footer {
+          margin: 50px 0;
+        }
+        .container {
+          padding-right: 15px;
+          padding-left: 15px;
+          margin-right: auto;
+          margin-left: auto;
+        }
+
+        #myDIV {
+          width: 100%;
+          padding: 50px 0;
+          text-align: center;
+          margin-top:20px;
+        }
+        /* Style the Image Used to Trigger the Modal */
+        #myImg, #myImg2, #myImg3 {
+          border-radius: 5px;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+
+        #myImg:hover,
+        #myImg2:hover,
+        #myImg3:hover{opacity: 0.7;}
+
+        /* The Modal (background) */
+        .modal {
+          display: none; /* Hidden by default */
+          position: fixed; /* Stay in place */
+          z-index: 1; /* Sit on top */
+          padding-top: 100px; /* Location of the box */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(0,0,0); /* Fallback color */
+          background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+        }
+
+        /* Modal Content (Image) */
+        .modal-content {
+          margin: auto;
+          display: block;
+          width: 100%;
+          max-width: 800px;
+        }
+
+        /* Caption of Modal Image (Image Text) - Same Width as the Image */
+        #caption, #caption2, #caption3 {
+          margin: auto;
+          display: block;
+          width: 80%;
+          max-width: 700px;
+          text-align: center;
+          color: #ccc;
+          padding: 10px 0;
+          height: 150px;
+        }
+
+        /* Add Animation - Zoom in the Modal */
+        .modal-content, #caption, #caption2, #caption3 {
+          -webkit-animation-name: zoom;
+          -webkit-animation-duration: 0.6s;
+          animation-name: zoom;
+          animation-duration: 0.6s;
+        }
+
+        @-webkit-keyframes zoom {
+          from {-webkit-transform:scale(0)}
+          to {-webkit-transform:scale(1)}
+        }
+
+        @keyframes zoom {
+          from {transform:scale(0)}
+          to {transform:scale(1)}
+        }
+
+        /* The Close Button */
+        .close, .close2, .close3{
+          position: absolute;
+          top: 15px;
+          right: 35px;
+          color: #f1f1f1;
+          font-size: 40px;
+          font-weight: bold;
+          transition: 0.3s;
+        }
+
+
+        .close:hover,
+        .close:focus,
+        .close2:hover,
+        .close2:focus,
+        .close3:hover,
+        .close3:focus {
+          color: #bbb;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+        /* 100% Image Width on Smaller Screens */
+        @media only screen and (max-width: 700px){
+          .modal-content {
+            width: 100%;
+          }
+        }
+
+        /* Single-direction drop shadow */
+
+        hr.style {
+          border: 0;
+          height: 0; /* Firefox... */
+          box-shadow: 0 0 10px 1px black;
+        }
+
+      </style>
+
+
+    </head>
+
+    <header class="business-header">
+      <div class="container">
+        <div class="row">
+        </div>
+      </div>
+    </header>
+
+    <br>
+
+    <div class="container">
+
+      <!--Comienza el div hide-->
+      <div id="hide" style="display: block">
+        <!-- Heading Row -->
+        <div class="row">
+          <div class="col-md-8">
+            <img class="img-responsive img-rounded"  alt=""><iframe width="740" height="500" src="<%= @article.youtubeurl %>" frameborder="0" allowfullscreen></iframe>
+          </div>
+
+          <!-- /.col-md-8 -->
+          <div class="col-md-4">
+            <h1><%= @article.title%></h1>
+            <h3><%= @article.body%></h3>
+
+          </div>
+          <!-- /.col-md-4 -->
+        </div>
+        <!--Advertencia de sitios inseguros-->
+        <div class="col-md-12">
+          <span class="label label-danger">¡Advertencia! - ¡Muchos webs sites pueden no ser confiables!</span>
+        </div>
+        <br><br>
+        <!-->
+        <!-- /.row -->
+
+
+        <!-- Call to Action Well -->
+        <div class="col-md-12">
+          <div class="col-md-12">
+
+            <div class="col-md-4">
+              <h3>Lista de materiales necesarios</h3>
+              <%= image_tag @article.imagematerials.url(), class: "img-responsive", id: "myImg", alt: "Lista de materiales", width: "300", height: "150" %>
+              <div id="myModal" class="modal">
+                <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+                <img class="modal-content" id="img01">
+                <div id="caption"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <h3>Diagrama de Fritzing</h3>
+              <%= image_tag @article.imagefritzing.url(), class: "img-responsive", id: "myImg2", alt: "Diagrama de Fritzing", width: "300", height: "150" %>
+              <div id="myModal2" class="modal">
+                <span class="close2" onclick="document.getElementById('myModal2').style.display='none'">&times;</span>
+                <img class="modal-content" id="img02">
+                <div id="caption2"></div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <h3>Programación</h3>
+              <%= image_tag @article.imagearduino.url(), class: "img-responsive", id: "myImg3", alt: "Programación", width: "300", height: "150" %>
+              <div id="myModal3" class="modal">
+                <span class="close3" onclick="document.getElementById('myModal3').style.display='none'">&times;</span>
+                <img class="modal-content" id="img03">
+                <div id="caption3"></div>
+              </div>
+            </div>
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <!-- Content Row -->
+        <div class="row">
+          <div class="col-md-4">
+            <hr class="style">
+            <br>
+            <h2><small>Acerca de esta actividad</small></h2>
+            <h4><strong>Objetivo de la actividad:</strong></h4>
+            <p><%= @article.objectives%></p>
+            <br>
+            <h4><strong>Completada la actividad el participante será capaz de:</strong></h4>
+            <p><%= @article.finishactivity%></p>
+          </div>
+          <!-- /.col-md-4 -->
+          <div class="col-md-4">
+            <hr class="style">
+            <br>
+            <h2><small>Alcance de la actividad</small></h2>
+            <p><%= @article.goals%></p>
+            <a class="btn btn-default" href="#">More Info</a>
+          </div>
+          <!-- /.col-md-4 -->
+          <div class="col-md-4">
+            <hr class="style">
+            <br>
+            <h2><small>Elementos para la implementacion de la actividad: </small></h2>
+            <p><%= @article.requirements%></p>
+            <a class="btn btn-default" href="#">More Info</a>
+          </div>
+          <!-- /.col-md-4 -->
+        </div>
+        <!-- /.row -->
+
+      </div>
+      <!-- Termina el div hide-->
+
+      <br><br>
+
+      <div class="row">
+        <div class="col-md-12">
+
+          <h1>Examen de Diagnostico de: <%= @article.title %></h1>
+          <button class="btn btn-success" onclick="showExam('show'), hideContent('hide')">Comenzar el examen</button>
+
+          <div id="show" style="display: none">
+            <iframe src="<%= @article.form %>" width="100%" height="1950" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
+            <h2 style="background-color: #96c752 ">¡Felicidades completaste esta actividad ahora puedes seguir con la siguiente!</h2>
+            <%= link_to 'button', root_path%>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script>
+
+        //examenes
+        function showExam(id) {
+            var x = document.getElementById('show');
+            document.getElementById(id).style.display = "block";
+        }
+
+        function hideContent(id) {
+            var x = document.getElementById('hide');
+            document.getElementById(id).style.display = "none";
+        }
+
+        //imagenes
+
+        var modal = document.getElementById('myModal');
+        var img = document.getElementById('myImg');
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+
+        img.onclick = function(){
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+
+        var span = document.getElementsByClassName("close")[0];
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        var modal2 = document.getElementById('myModal2');
+        var img2 = document.getElementById('myImg2');
+        var modalImg2 = document.getElementById("img02");
+        var captionText2 = document.getElementById("caption2");
+
+        img2.onclick = function(){
+            modal2.style.display = "block";
+            modalImg2.src = this.src;
+            captionText2.innerHTML = this.alt;
+        }
+
+        var span2 = document.getElementsByClassName("close2")[0];
+
+        span2.onclick = function() {
+            modal2.style.display = "none";
+        }
+
+        var modal3 = document.getElementById('myModal3');
+        var img3 = document.getElementById('myImg3');
+        var modalImg3 = document.getElementById("img03");
+        var captionText3 = document.getElementById("caption3");
+
+        img3.onclick = function(){
+            modal3.style.display = "block";
+            modalImg3.src = this.src;
+            captionText3.innerHTML = this.alt;
+        }
+
+        var span3 = document.getElementsByClassName("close3")[0];
+
+        span3.onclick = function() {
+            modal3.style.display = "none";
+        }
+    </script>
+
+<%else%>
+
+    <h1>Pagina no econtrada</h1>
+
+<%end%>

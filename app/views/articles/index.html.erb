@@ -1,0 +1,87 @@
+<% if user_signed_in? %>
+
+    <% @articles.each do |article| %>
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-header card-chart" data-background-color="orange">
+            </div>
+            <div class="card-content">
+              <h3 class="title"><%= link_to article.title, article %></h3>
+              <p class="category"><%= truncate(article.body, :length => 49) %></p>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons">access_time</i> Actualizado el  <%= article.updated_at %>
+              </div>
+            </div>
+          </div>
+        </div>
+    <%end%>
+
+<%else%>
+    <!--Area de inicio de sesion/Visitantes-->
+    <!DOCTYPE html>
+    <html lang="utf8">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+          margin-bottom: 0;
+          border-radius: 0;
+        }
+        img{
+          max-width: 100%;
+          height: auto;
+        }
+
+        /* Add a gray background color and some padding to the footer */
+        footer {
+          background-color: #f2f2f2;
+          padding: 25px;
+        }
+
+      </style>
+    </head>
+    <body>
+
+    <div class="jumbotron">
+      <div class="container text-center">
+        <%= image_tag "logo_mirobo.png"%>
+        <h1>BIENVENIDO A MI ROBOTICA</h1>
+        <p>¿Deseas inscribirte?</p>
+        <p>Manda tus datos al correo contacto@mirobotica.com y nos pondremos en contacto contigo.</p>
+
+        <%= link_to "Inciar sesion", new_user_session_path, class:"btn btn-xlarge", style:"font-size: 30px" %>
+        <%= link_to "Crear cuenta", new_user_registration_path, class:"btn btn-xlarge",style:"font-size: 30px" %>
+      </div>
+    </div>
+
+    <footer class="container-fluid text-center">
+      <div class="col-md-12">
+        <%= image_tag "footerLogo.png"%>
+        <hr>
+
+      </div>
+      <div class="col-md-12">
+        <p>Todos los derechos reservados ® 2015</p>
+        <p>Sistema de Gestión para el Desarrollo del Talento
+          Estrategia y Desarrollo Organizacional S.C.</p>
+      </div>
+    </footer>
+
+    </body>
+    </html>
+    <!-->
+
+
+    </div>
+
+    </body>
+    </html>
+
+<%end%>
